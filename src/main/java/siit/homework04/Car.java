@@ -9,6 +9,8 @@ public  abstract class Car implements Vehicle, CarBehaviour{
     private int gears;
     private final double consumptionPer100Km;
     private double initialFuel;
+    private int shiftedGears;
+
 
     /**
      * This is a constructor of objects. In this case we create objects that will require 7 different
@@ -22,6 +24,7 @@ public  abstract class Car implements Vehicle, CarBehaviour{
      * @param consumptionPer100Km is a double parameter whose value is final and cannot be changed.
      */
     public Car(String chassisNumber, int tireSize, float fuelTankSize, String fuelType, double availableFuel, int gears, double consumptionPer100Km) {
+        this.shiftedGears = 0;
         this.initialFuel = availableFuel;
         setChassisNumberOrThrow(chassisNumber);
         this.tireSize = tireSize;
@@ -54,6 +57,13 @@ public  abstract class Car implements Vehicle, CarBehaviour{
      */
     public int getGears() {
         return gears;
+    }
+    public int getShiftedGears() {
+        return shiftedGears;
+    }
+
+    public void setShiftedGears(int shiftedGears) {
+        this.shiftedGears = shiftedGears;
     }
 
     static ChassisNumbersList chassisNumbers = new ChassisNumbersList();
