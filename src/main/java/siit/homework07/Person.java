@@ -7,14 +7,12 @@ public abstract class Person{
     private Integer age;
 
     public Person(String name, Integer age) {
+        this.name = name;
+        this.age = age;
         if(name.isBlank()){
             throw new IllegalArgumentException("Person Name must contain at least one character.");
-        }else {
-            this.name = name;
         }
-        if(age >= 0){
-            this.age = age;
-        }else{
+        if(age < 0){
             throw new IllegalArgumentException("Age must be bigger than 0.");
         }
     }
