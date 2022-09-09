@@ -21,7 +21,7 @@ public class FestivalGate {
      * @return Returns a random ticket type.
      */
     public TicketType generateTicketType(){
-        List<TicketType> ticketTypes = Arrays.asList(TicketType.FULL, TicketType.FREE_PASS, TicketType.FULL_VIP, TicketType.ONE_DAY, TicketType.ONE_DAY_VIP);
+        List<TicketType> ticketTypes = Arrays.asList(TicketType.values());
         Random random = new Random();
         return ticketTypes.get(random.nextInt(ticketTypes.size()));
     }
@@ -60,28 +60,18 @@ public class FestivalGate {
      * those ticket types to the specific variable. After that I print the values accordingly to the console.
      */
     public synchronized void readRepoStatistics(){
-        long fullTicketCount = ATTENDEE_REPOSITORY.stream()
-                .filter(ticket -> ticket.equals(TicketType.FULL))
-                .count();
-        long fullVipTicketCount = ATTENDEE_REPOSITORY.stream()
-                .filter(ticket -> ticket.equals(TicketType.FULL_VIP))
-                .count();
-        long freePassTicketCount = ATTENDEE_REPOSITORY.stream()
-                .filter(ticket -> ticket.equals(TicketType.FREE_PASS))
-                .count();
-        long oneDayTicketCount = ATTENDEE_REPOSITORY.stream()
-                .filter(ticket -> ticket.equals(TicketType.ONE_DAY))
-                .count();
-        long oneDayVipTicketCount = ATTENDEE_REPOSITORY.stream()
-                .filter(ticket -> ticket.equals(TicketType.ONE_DAY_VIP))
-                .count();
-
         System.out.println(" ");
         System.out.println(ATTENDEE_REPOSITORY.size() + " people have entered.");
-        System.out.println(fullTicketCount + " people have full tickets.");
-        System.out.println(freePassTicketCount + " people have free passes.");
-        System.out.println(fullVipTicketCount + " people have full VIP tickets.");
-        System.out.println(oneDayTicketCount + " people have one-day passes.");
-        System.out.println(oneDayVipTicketCount + " people have one-day VIP passes.");
+        System.out.println(getCount(TicketType.FULL) + " people have full tickets.");
+        System.out.println(getCount(TicketType.FREE_PASS) + " people have free passes.");
+        System.out.println(getCount(TicketType.FULL_VIP) + " people have full VIP tickets.");
+        System.out.println(getCount(TicketType.ONE_DAY) + " people have one-day passes.");
+        System.out.println(getCount(TicketType.ONE_DAY_VIP) + " people have one-day VIP passes.");
+    }
+
+    private long getCount(TicketType ticketType) {
+        return ATTENDEE_REPOSITORY.stream()
+                .filter(ticket -> ticket.equals(ticketType))
+                .count();
     }
 }

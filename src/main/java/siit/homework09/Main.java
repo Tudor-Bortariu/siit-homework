@@ -14,7 +14,7 @@ public class Main {
          * to the repository. I also used the Thread.sleep method to slow down the process. In this way I was able to instantiate 101 Attendee
          * Threads to scan the tickets.
          */
-        for (int i = 0; i <= 100; i++) {
+        for (int i = 0; i < 100; i++) {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
